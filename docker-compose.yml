@@ -9,4 +9,11 @@ services:
         volumes: 
             - ./app:/app
         command: >
-            sh -c "python manage.py runserver 0.0.0.0:8000"
+            sh -c "python manage.py migrate &&
+                   python manage.py runserver 0.0.0.0:8000"
+        environment: 
+            - DB_HOST=192.168.43.216
+            - DB_NAME=db_attendance
+            - DB_USER=sa
+            - DB_PASS=p@ssw0rd
+            - DB_PORT=1404
