@@ -1,5 +1,12 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
+from django.utils import timezone
+
+
+def sample_user(email='test@mail.com', password='testpass'):
+    # Create a sample user
+    return get_user_model().objects.create_user(email, password)
 
 
 class ModelTests(TestCase):
@@ -37,3 +44,12 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_attendance_str(self):
+        # Test the attendance representation
+        attendance = models.Attendance.objects.create(
+            user=sample_user(),
+            time_in=timezone.localtime(timezone.now()).strftime('%H:%M:%S'),
+            date_in=timezone.localtime(timezone.now()).strftime('%Y-%m-%d')
+        )
+        self.assertEqual(str(attendance), attendance.date_in)
