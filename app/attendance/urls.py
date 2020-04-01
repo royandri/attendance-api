@@ -5,8 +5,13 @@ app_name = 'attendance'
 
 urlpatterns = [
     path(
-        'attendance_in/<int:id>/',
-        views.AttendanceInViewSet.as_view(),
+        'attendance_in/',
+        views.AttendanceInViewSet.as_view({'post': 'attendance_in'}),
         name='attendance-in'
+    ),
+    path(
+        'attendance_out/',
+        views.AttendanceInViewSet.as_view({'post': 'attendance_out'}),
+        name='attendance-out'
     ),
 ]

@@ -33,3 +33,13 @@ class AttendanceApiTest(TestCase):
         )
         self.assertTrue(len(user) > 0)
         self.assertFalse(len(attendance) > 0)
+
+    def test_attendance_out(self):
+        # Test attendance for out user
+        user = User.objects.filter(id=self.user.id)
+        attendance = Attendance.objects.filter(
+            user_id=self.user.id,
+            date_in=timezone.localtime(timezone.now()).strftime('%Y-%m-%d')
+        )
+        self.assertTrue(len(user) > 0)
+        self.assertFalse(len(attendance) > 0)

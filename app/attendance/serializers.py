@@ -9,3 +9,11 @@ class AttendanceSerializer(serializers.ModelSerializer):
         model = Attendance
         fields = ('id', 'time_in', 'date_in', 'time_out', 'date_out')
         read_only_fields = ('id',)
+
+
+class AttendanceInSerializer(serializers.ModelSerializer):
+    # Serializer for attendance in
+
+    class Meta:
+        model = Attendance
+        fields = ('time_in', 'date_in')
